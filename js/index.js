@@ -1,5 +1,5 @@
 import Chnl from 'webaudio-chnl';
-import Recorder from './recorderjs/recorder';
+import Recorder from 'wrecorder';
 
 export default class Wmstr extends Chnl {
 
