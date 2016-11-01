@@ -1,67 +1,35 @@
-# Chnl - one channel, all effects.
+# Wmstr - Webaudio Master Channel
 
-## Why would I ever want a _Chnl_?
-
-I needed something with a LOT of audio effects integrated which can be manipulated in many different aspects. And I needed to use this in many different ways: Every native AudioNode should be able to connect to it as it would be a normal AudioNode, but also other Chnls should be able to connect to another Chnl.
-So I could simply and intuitively create audio graphs with a set of effects.
-No matter if I connect a song, mic input or even a synthesizer.
-
-__Therefore I created _Chnl_.__
+## What is Wmstr?
+The scope of this module is to manage the input of many audio-channels in one instance.
+It's just a simple extension of the [Chnl](https://github.com/scriptify/Chnl) module, with the only difference that you can record all the input to it and output the recorded data directly to a file.
 
 ## Usage
-It's really simple. And intuitive.
-### Creating a __Chnl__
-You can create a new _Chnl_ instance by constructing the _Chnl_-class with your _AudioContext object_ as the 1° parameter.
+### Constructing
 ```javascript
-new Channel(audioCtx)
+new Wmstr(audioCtx, connectToSpeakers)
 ```
 
-### Effects
-You have access to __a lot of effects__.
-Under the hood, _Chnl_ uses the [webaudio-effect-units-collection](https://github.com/scriptify/webaudio-effect-units-collection) module. So you have access to a lot of effects which can be enabled and disabled.
+There are exactly tow arguments.
+The first one has to be an AudioContext-object.
+The second one is optional, as it has a default value of _true_. I this parameter evaluates to true, this channel will automatically connect to the speakers(audioCtx.destination). If it evaluates to false, the channel won't be connected to the speakers.
 
-You can access the effects with the _effects_ property of your _Chnl_ instance.
+Now, you can use this object like a normal Chnl-object and use the extra methods.
 
-
-_Example_
+### Start recording
 ```javascript
-const channel = new Chnl(audioCtx);
-const {
-  gain,
-  chorus,
-  delay,
-  phaser,
-  overdrive,
-  compressor,
-  lowpass,
-  highpass,
-  tremolo,
-  wahwah,
-  bitcrusher,
-  moog,
-  pingPongDelay
-} = channel.effects;
-gain.methods.set(0.35);
+.startRecording()
 ```
 
-### Connecting
-#### Connect to a Chnl
-You can connect any _normal AudioNode_ to a _Chnl_:
+Simply starts recording the output of this channel.
+
+### Stop recording
 ```javascript
-const channel = new Chnl(audioCtx);
-const gain = audioCtx.createGain();
-gain.connect(channel);
+.stopRecording(filename)
 ```
-But you can also connect a _Chnl_ to a _normal AudioNode_:
-```javascript
-const channel = new Chnl(audioCtx);
-const gain = audioCtx.createGain();
-channel.connect(gain);
-```
-You can even connect one _Chnl_ to another one:
-```javascript
-const channel1 = new Chnl(audioCtx);
-const channel2 = new Chnl(audioCtx);
-channel1.connect(channel2);
-```
-Have fun connecting!
+
+This method stops the recording you previously started.
+You can pass one parameter, which is __optional__.
+If it has a value, the recorded audio gets automatically downloaded with the specified filename.
+
+The method returns a Promise which returns the recorder audio as binary data(blob).
