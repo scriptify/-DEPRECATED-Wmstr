@@ -4,6 +4,12 @@
 The scope of this module is to manage the input of many audio-channels in one instance.
 It's just a simple extension of the [Chnl](https://github.com/scriptify/Chnl) module, with the only difference that you can record all the input to it and output the recorded data directly to a file.
 
+## Installation
+The package is hosted on npm. You can consume it with any package manager supporting npm packages.
+```bash
+npm i wmstr
+```
+
 ## Usage
 ### Constructing
 ```javascript
