@@ -1,6 +1,6 @@
 {
   "name": "wmstr",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Wmstr - Webaudio Master Channel. Managing audio.",
   "main": "build/bundle.js",
   "scripts": {
@@ -33,7 +33,7 @@
     "url": "https://github.com/scriptify/Wmstr.git"
   },
   "dependencies": {
-    "webaudio-chnl": "*",
+    "webaudio-chnl": "0.0.6",
     "wrecorder": "github:scriptify/Wrecorder"
   }
 }
